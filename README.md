@@ -2,7 +2,7 @@
 
 A decentralized social network built on Solana blockchain that enables users to create profiles, post content, and send private encrypted messages in a fully on-chain manner. OpenMSCP provides the building blocks for decentralized social systems that users can own and control.
 
-Devnet Program ID: 7g9KYVp9QseDpRy8RRVKTR3zQ33ca4iHuDZNqoRihoWA
+Devnet Program ID: 9CuK5BsFiUEF781iSYSJt1BP2xJxDLH2DrVvfoZKJAtj
 
 ## Core Features
 

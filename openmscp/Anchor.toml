@@ -1,14 +1,14 @@
 [features]
 seeds = false
 skip-lint = false
-[programs.devnet]
-openmscp = "HpphDK8HgBUAs8zztpEJiwxX2pmwi8qmQpugRhuiwf3x"
+[programs.localnet]
+openmscp = "9CuK5BsFiUEF781iSYSJt1BP2xJxDLH2DrVvfoZKJAtj"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "localnet"
 wallet = "./tests/keypair.json"
 
 [scripts]
