@@ -1,15 +1,33 @@
-# OpenMSCP - Decentralized Solana Social Network
+# OpenMSCP - Open Modular Social Context Protocol
 
-A decentralized social network built on Solana blockchain that enables users to create profiles, post content, and send private encrypted messages in a fully on-chain manner.
+A decentralized social network built on Solana blockchain that enables users to create profiles, post content, and send private encrypted messages in a fully on-chain manner. OpenMSCP provides the building blocks for decentralized social systems that users can own and control.
 
 Devnet Program ID: 7g9KYVp9QseDpRy8RRVKTR3zQ33ca4iHuDZNqoRihoWA
 
+## Core Features
+
+OpenMSCP enables integration of customizable modules that adapt to the needs of any platform:
+
+- **Modular Communication**: Build and customize social interactions with our modular memo system
+- **Decentralized Profiles**: User-owned identities powered by DIDs for complete control over your data
+- **Blockchain Integration**: Seamless integration with Solana and DIDs for secure, transparent operations
+- **User-Owned Data**: Take control of your social data with our decentralized storage solutions
+
+## Building the Future of Social Networks
+
+OpenMSCP provides the foundation for a new generation of social networks that prioritize user ownership, privacy, and interoperability:
+
+- **Decentralized Social Networks**: Build social networks that put users in control of their data and interactions
+- **User-Owned Communities**: Create communities where members have true ownership and governance rights
+- **Interoperable Systems**: Enable seamless communication between different social platforms and protocols
+
 ## Project Structure
 
-This project consists of two main components:
+This project consists of three main components:
 
 1. **Solana Program** (built with Anchor framework) - The on-chain program responsible for profile management, posting, and messaging.
 2. **JavaScript/TypeScript SDK** - A comprehensive SDK that allows developers to build frontends to interact with the on-chain program.
+3. **Web UI** - A modern React-based user interface for interacting with the OpenMSCP protocol.
 
 ## Features
 
@@ -52,10 +70,18 @@ This project consists of two main components:
    ```
 
 4. Build the SDK:
+
    ```bash
    cd ../sdk
    yarn install
    yarn build
+   ```
+
+5. Start the Web UI:
+   ```bash
+   cd ../ui
+   yarn install
+   yarn dev
    ```
 
 ## Running Tests
@@ -71,6 +97,13 @@ anchor test --arch sbf
 
 ```bash
 cd sdk
+yarn test
+```
+
+### UI Tests
+
+```bash
+cd ui
 yarn test
 ```
 
@@ -103,7 +136,7 @@ await client.sendMessage(recipientPublicKey, "This is an encrypted message");
 
 ## Architecture
 
-The project follows a two-layer architecture:
+The project follows a three-layer architecture:
 
 1. **On-chain Layer**: Anchor program with account structures for:
 
@@ -112,10 +145,19 @@ The project follows a two-layer architecture:
    - Private encrypted messaging
 
 2. **SDK Layer**: TypeScript SDK with modules for:
+
    - Core blockchain interaction
    - Profile management
    - Post creation and retrieval
    - Messaging with encryption utilities
+
+3. **UI Layer**: React-based web interface with:
+   - Modern, responsive design
+   - Real-time updates
+   - Secure wallet integration
+   - User-friendly profile management
+   - Seamless post creation and viewing
+   - Encrypted messaging interface
 
 ## Contributing
 
