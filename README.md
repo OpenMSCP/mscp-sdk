@@ -25,9 +25,9 @@ OpenMSCP provides the foundation for a new generation of social networks that pr
 
 This project consists of three main components:
 
-1. **Solana Program** (built with Anchor framework) - The on-chain program responsible for profile management, posting, and messaging.
-2. **JavaScript/TypeScript SDK** - A comprehensive SDK that allows developers to build frontends to interact with the on-chain program.
-3. **Web UI** - A modern React-based user interface for interacting with the OpenMSCP protocol.
+1. **Solana Program** (`openmscp/`) - The on-chain program built with Anchor framework, responsible for profile management, posting, and messaging.
+2. **JavaScript/TypeScript SDK** (`sdk/`) - A comprehensive SDK that allows developers to build frontends to interact with the on-chain program.
+3. **Web UI** (`mscp-ui/`) - A modern React-based user interface for interacting with the OpenMSCP protocol.
 
 ## Features
 
@@ -43,7 +43,7 @@ This project consists of three main components:
 - [Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
 - [Anchor Framework](https://www.anchor-lang.com/docs/installation)
 - [Rust](https://www.rust-lang.org/tools/install)
-- [Node.js](https://nodejs.org/) (v14 or higher)
+- [Node.js](https://nodejs.org/) (v16 or higher)
 - [Yarn](https://yarnpkg.com/getting-started/install)
 
 ### Installation
@@ -52,21 +52,21 @@ This project consists of three main components:
 
    ```bash
    git clone <repository-url>
-   cd openmscp
+   cd mscp-sdk
    ```
 
 2. Build the Solana program:
 
    ```bash
-   cd mscp-social
+   cd openmscp
    yarn install
-   anchor build --arch sbf
+   anchor build
    ```
 
-3. Deploy to localnet for testing:
+3. Deploy to devnet for testing:
 
    ```bash
-   anchor deploy --arch sbf
+   anchor deploy --provider.cluster devnet
    ```
 
 4. Build the SDK:
@@ -79,7 +79,7 @@ This project consists of three main components:
 
 5. Start the Web UI:
    ```bash
-   cd ../ui
+   cd ../mscp-ui
    yarn install
    yarn dev
    ```
@@ -89,8 +89,8 @@ This project consists of three main components:
 ### Program Tests
 
 ```bash
-cd mscp-social
-anchor test --arch sbf
+cd openmscp
+anchor test
 ```
 
 ### SDK Tests
@@ -103,7 +103,7 @@ yarn test
 ### UI Tests
 
 ```bash
-cd ui
+cd mscp-ui
 yarn test
 ```
 
