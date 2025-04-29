@@ -8,6 +8,7 @@ Cargo.lock
 .vscode/
 *.swp
 *.swo
+.cursor/
 
 # Node.js
 node_modules/
@@ -27,6 +28,11 @@ dist/
 # OS specific files
 .DS_Store
 Thumbs.db
+
+progress.md
+prd.md
+reference.md
+feature-checklist.md
 
 # Keep these files
 !openmscp/programs/openmscp/src/lib.rs
