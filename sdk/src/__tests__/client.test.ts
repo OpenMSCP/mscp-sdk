@@ -54,7 +54,7 @@ describe("OpenMSCPClient", () => {
   let wallet: Wallet;
   let client: OpenMSCPClient;
   const programId = new PublicKey(
-    "7g9KYVp9QseDpRy8RRVKTR3zQ33ca4iHuDZNqoRihoWA"
+    "9CuK5BsFiUEF781iSYSJt1BP2xJxDLH2DrVvfoZKJAtj"
   );
 
   beforeAll(() => {

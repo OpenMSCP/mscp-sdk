@@ -44,7 +44,7 @@ describe("openmscp", () => {
     expect(profileAccount.bio).to.equal(bio);
     expect(profileAccount.profilePicture).to.equal(profilePicture);
     expect(profileAccount.createdAt.toNumber()).to.be.greaterThan(0);
-    expect(profileAccount.updatedAt.toNumber()).to.be.greaterThan(0);
+    expect(profileAccount.postCount).to.equal(0);
   });
 
   it("Updates a profile", async () => {
@@ -80,9 +80,6 @@ describe("openmscp", () => {
     expect(updatedProfile.profilePicture).to.equal(newProfilePicture);
     expect(updatedProfile.createdAt.toNumber()).to.equal(
       originalProfile.createdAt.toNumber()
-    );
-    expect(updatedProfile.updatedAt.toNumber()).to.be.greaterThan(
-      originalProfile.updatedAt.toNumber()
     );
   });
 
@@ -153,6 +150,99 @@ describe("openmscp", () => {
     expect(messageAccount.encryptedContent).to.equal(encryptedContent);
     expect(messageAccount.timestamp.toNumber()).to.be.greaterThan(0);
     expect(messageAccount.read).to.be.false;
+  });
+
+  it("Creates a post", async () => {
+    // Test data
+    const content = "This is a test post content";
+
+    // Derive profile PDA
+    const [profilePda] = anchor.web3.PublicKey.findProgramAddressSync(
+      [Buffer.from("profile"), user.publicKey.toBuffer()],
+      program.programId
+    );
+
+    // Fetch the profile to get the current post count
+    const profileAccount = await program.account.profile.fetch(profilePda);
+
+    // Derive post PDA using post count
+    const [postPda] = anchor.web3.PublicKey.findProgramAddressSync(
+      [
+        Buffer.from("post"),
+        user.publicKey.toBuffer(),
+        Buffer.from([profileAccount.postCount]),
+      ],
+      program.programId
+    );
+
+    // Create a memo account for storing the post content
+    const memoAccount = anchor.web3.Keypair.generate();
+
+    // Get current timestamp for the post
+    const timestamp = Math.floor(Date.now() / 1000);
+
+    // Create the post data in the expected JSON format
+    const postData = JSON.stringify({
+      type: "post",
+      author: user.publicKey.toString(),
+      ts: timestamp,
+      content: content,
+    });
+
+    // Create the transaction
+    const tx = new anchor.web3.Transaction();
+
+    // Add the create post instruction
+    tx.add(
+      await program.methods
+        .createPost(content)
+        .accounts({
+          post: postPda,
+          user: user.publicKey,
+          profile: profilePda,
+          memoAccount: memoAccount.publicKey,
+          instructionsSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
+          systemProgram: anchor.web3.SystemProgram.programId,
+        })
+        .instruction()
+    );
+
+    // Add the memo program instruction
+    tx.add(
+      new anchor.web3.TransactionInstruction({
+        programId: new anchor.web3.PublicKey(
+          "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+        ),
+        keys: [],
+        data: Buffer.from(postData),
+      })
+    );
+
+    // Log the PDA and addresses
+    console.log("Post PDA:", postPda.toString());
+    console.log("User:", user.publicKey.toString());
+    console.log("Profile:", profilePda.toString());
+    console.log("Post Count:", profileAccount.postCount);
+    console.log("Memo Account:", memoAccount.publicKey.toString());
+
+    // Send and confirm the transaction
+    await provider.sendAndConfirm(tx);
+
+    // Fetch the created post
+    const postAccount = await program.account.post.fetch(postPda);
+
+    // Fetch the updated profile to verify post count
+    const updatedProfile = await program.account.profile.fetch(profilePda);
+
+    // Verify post data
+    expect(postAccount.author.toString()).to.equal(user.publicKey.toString());
+    expect(postAccount.timestamp.toNumber()).to.be.greaterThan(0);
+    expect(postAccount.memoAccount.toString()).to.equal(
+      memoAccount.publicKey.toString()
+    );
+
+    // Verify post count was incremented
+    expect(updatedProfile.postCount).to.equal(profileAccount.postCount + 1);
   });
 
   // Note: Testing post creation with Memo Program integration
