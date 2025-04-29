@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+While building our program, refer to the [prd.md](mdc:prd.md) file for guidance on product requirements.
+While building our program, check [progress.md](mdc:progress.md) and update it periodically of any major changes to keep track of our progress.
+When deciding what next to build, refer to both [prd.md](mdc:prd.md) and [progress.md](mdc:progress.md) to determine what is the next best feature to build out.
+Write out all features' requirements and development points progress in [progress.md](mdc:progress.md) when building it out.
+Refer to [feature-checklist.md](mdc:feature-checklist.md) for a general guideline on what features to build.
+Prior to writing code, review the code and ensure there is no linting errors or breaking changes before suggesting it.
+
+Refer to [reference.md](mdc:reference.md) and the URL inside for on-chain program inspiration and code base,
+
+Always use: --arch sbf when testing or building the program with Anchor or Cargo.

@@ -1,6 +1,36 @@
-.prettierignore
-feature-checklist.md
-prd.md
-progress.md
-reference.md
-.cursor
+# Rust build files
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# TypeScript
+dist/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Keep these files
+!openmscp/programs/openmscp/src/lib.rs
+!openmscp/programs/openmscp/Cargo.toml
+!openmscp/Anchor.toml
+!openmscp/Cargo.toml
+!openmscp/Cargo.lock

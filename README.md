@@ -2,6 +2,8 @@
 
 A decentralized social network built on Solana blockchain that enables users to create profiles, post content, and send private encrypted messages in a fully on-chain manner.
 
+Devnet Program ID: 7g9KYVp9QseDpRy8RRVKTR3zQ33ca4iHuDZNqoRihoWA
+
 ## Project Structure
 
 This project consists of two main components:
