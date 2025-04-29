@@ -1,104 +1,124 @@
-# MSCP SDK - Decentralized Solana Social Network
+# OpenMSCP - Decentralized Solana Social Network
 
-A decentralized social network built on Solana blockchain that enables users to create profiles, post content, and send private messages in a fully on-chain manner.
-
-## Features
-
-- **Profile Management**: Create and manage on-chain profiles with unique usernames
-- **On-chain Posting**: Publish text posts directly to the Solana blockchain
-- **Private Messaging**: Send encrypted messages to other users
-- **IPFS Integration**: Store profile pictures on IPFS
+A decentralized social network built on Solana blockchain that enables users to create profiles, post content, and send private encrypted messages in a fully on-chain manner.
 
 ## Project Structure
 
-```
-mscp-sdk/
-├── programs/           # Anchor program source code
-├── sdk/               # TypeScript SDK
-├── tests/             # Program and SDK tests
-└── ui/                # Reference UI implementation
-```
+This project consists of two main components:
 
-## Getting Started
+1. **Solana Program** (built with Anchor framework) - The on-chain program responsible for profile management, posting, and messaging.
+2. **JavaScript/TypeScript SDK** - A comprehensive SDK that allows developers to build frontends to interact with the on-chain program.
+
+## Features
+
+- **Profile Management**: Create and update profiles with usernames, bios, and profile pictures (IPFS hashes)
+- **On-chain Posting**: Post content via Solana Memo Program with metadata stored on-chain
+- **Private Messaging**: Send and receive encrypted messages between users
+- **Developer SDK**: Easy-to-use JavaScript/TypeScript SDK for building applications on top of the network
+
+## Setup and Installation
 
 ### Prerequisites
 
-- Node.js (v16 or later)
-- Rust (latest stable)
-- Solana CLI tools
-- Anchor CLI
+- [Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
+- [Anchor Framework](https://www.anchor-lang.com/docs/installation)
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [Yarn](https://yarnpkg.com/getting-started/install)
 
 ### Installation
 
 1. Clone the repository:
 
+   ```bash
+   git clone <repository-url>
+   cd openmscp
+   ```
+
+2. Build the Solana program:
+
+   ```bash
+   cd mscp-social
+   yarn install
+   anchor build --arch sbf
+   ```
+
+3. Deploy to localnet for testing:
+
+   ```bash
+   anchor deploy --arch sbf
+   ```
+
+4. Build the SDK:
+   ```bash
+   cd ../sdk
+   yarn install
+   yarn build
+   ```
+
+## Running Tests
+
+### Program Tests
+
 ```bash
-git clone https://github.com/your-org/mscp-sdk.git
-cd mscp-sdk
+cd mscp-social
+anchor test --arch sbf
 ```
 
-2. Install dependencies:
+### SDK Tests
 
 ```bash
-# Install Anchor
-cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
-avm install latest
-avm use latest
-
-# Install project dependencies
-npm install
+cd sdk
+yarn test
 ```
 
-3. Build the program:
+## Usage
 
-```bash
-anchor build
-```
-
-4. Run tests:
-
-```bash
-anchor test
-```
-
-## Development
-
-### Program Development
-
-The Solana program is written in Rust using the Anchor framework. Key components:
-
-- Profile management
-- Post storage
-- Message encryption
-- Account structures
-
-### SDK Development
-
-The TypeScript SDK provides a simple interface to interact with the on-chain program:
+### Using the SDK
 
 ```typescript
-import { MSCP } from "@mscp/sdk";
+import { OpenMSCPClient } from "openmscp-sdk";
+import { Connection, Keypair } from "@solana/web3.js";
 
-const sdk = new MSCP();
-await sdk.connect(); // Connect wallet
+// Initialize client
+const connection = new Connection("https://api.devnet.solana.com");
+const wallet = Keypair.generate(); // Or use a wallet adapter
+const client = new OpenMSCPClient(connection, wallet);
 
-// Create profile
-const profile = await sdk.createProfile({
-  username: "alice",
-  bio: "Web3 enthusiast",
+// Create a profile
+await client.createProfile({
+  username: "satoshi",
+  bio: "Bitcoin creator",
+  profilePicture: "ipfs://QmHash...",
 });
 
-// Create post
-const post = await sdk.createPost("Hello, decentralized world!");
+// Create a post
+await client.createPost("Hello, Solana social network!");
 
-// Send message
-const message = await sdk.sendMessage(recipientAddress, "Secret message");
+// Send a message
+await client.sendMessage(recipientPublicKey, "This is an encrypted message");
 ```
+
+## Architecture
+
+The project follows a two-layer architecture:
+
+1. **On-chain Layer**: Anchor program with account structures for:
+
+   - Profile management
+   - Post metadata (content stored via Memo Program)
+   - Private encrypted messaging
+
+2. **SDK Layer**: TypeScript SDK with modules for:
+   - Core blockchain interaction
+   - Profile management
+   - Post creation and retrieval
+   - Messaging with encryption utilities
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
