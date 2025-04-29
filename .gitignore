@@ -1,3 +1,6 @@
+.prettierignore
+feature-checklist.md
 prd.md
 progress.md
+reference.md
 .cursor
