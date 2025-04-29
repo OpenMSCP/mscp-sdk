@@ -19,11 +19,6 @@ jest.mock("@project-serum/anchor", () => {
             rpc: () => "mock-tx-signature",
           }),
         }),
-        createPost: () => ({
-          accounts: () => ({
-            rpc: () => "mock-tx-signature",
-          }),
-        }),
         sendMessage: () => ({
           accounts: () => ({
             rpc: () => "mock-tx-signature",
@@ -38,7 +33,7 @@ jest.mock("@project-serum/anchor", () => {
             bio: "Test bio",
             profilePicture: "ipfs://test",
             createdAt: new Date().getTime(),
-            updatedAt: new Date().getTime(),
+            postCount: 0,
           }),
         },
         message: {
@@ -84,11 +79,6 @@ describe("OpenMSCPClient", () => {
       expect(profile.username).toBe("testuser");
       expect(profile.bio).toBe("Test bio");
     }
-  });
-
-  it("should create a post", async () => {
-    const tx = await client.createPost("Test post content");
-    expect(tx).toBe("mock-tx-signature");
   });
 
   it("should get messages", async () => {

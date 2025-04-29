@@ -12,7 +12,7 @@ async function main() {
 
   // Program ID from deployment
   const programId = new PublicKey(
-    "7g9KYVp9QseDpRy8RRVKTR3zQ33ca4iHuDZNqoRihoWA"
+    "9CuK5BsFiUEF781iSYSJt1BP2xJxDLH2DrVvfoZKJAtj"
   );
 
   // Initialize client

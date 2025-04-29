@@ -13,16 +13,21 @@ import {
   Message,
 } from "../types";
 import { IDL } from "./idl";
+import { PostService } from "../post";
 
 export class OpenMSCPClient {
   private program: Program;
   private provider: AnchorProvider;
   private programId: PublicKey;
+  public post: PostService;
 
   constructor(connection: Connection, wallet: Wallet, programId: PublicKey) {
     this.programId = programId;
     this.provider = new AnchorProvider(connection, wallet, {});
     this.program = new Program(IDL, programId, this.provider);
+
+    // Initialize post service
+    this.post = new PostService(this.program, this.provider, this.programId);
   }
 
   async createProfile(params: CreateProfileParams): Promise<string> {
@@ -54,29 +59,6 @@ export class OpenMSCPClient {
       .accounts({
         profile: profilePDA,
         user: this.provider.wallet.publicKey,
-      })
-      .rpc();
-
-    return tx;
-  }
-
-  async createPost(content: string): Promise<string> {
-    const timestamp = Math.floor(Date.now() / 1000);
-    const [postPDA] = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("post"),
-        this.provider.wallet.publicKey.toBuffer(),
-        Buffer.from(timestamp.toString()),
-      ],
-      this.programId
-    );
-
-    const tx = await this.program.methods
-      .createPost(content)
-      .accounts({
-        post: postPDA,
-        user: this.provider.wallet.publicKey,
-        systemProgram: SystemProgram.programId,
       })
       .rpc();
 

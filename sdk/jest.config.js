@@ -7,5 +7,9 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  setupFilesAfterEnv: ["<rootDir>/src/__tests__/setup.ts"],
+  globals: {
+    "ts-jest": {
+      tsconfig: "tsconfig.json",
+    },
+  },
 };

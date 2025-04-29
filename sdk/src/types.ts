@@ -6,7 +6,7 @@ export interface Profile {
   bio: string;
   profilePicture: string;
   createdAt: number;
-  updatedAt: number;
+  postCount: number;
 }
 
 export interface Post {
