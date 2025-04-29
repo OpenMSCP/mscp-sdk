@@ -1,7 +1,4 @@
 use anchor_lang::prelude::*;
-use std::str::FromStr;
-use anchor_lang::solana_program::program::invoke;
-use anchor_lang::solana_program::system_instruction;
 use anchor_lang::solana_program::sysvar::instructions::{ID as INSTRUCTIONS_ID};
 use anchor_lang::solana_program::sysvar::instructions::load_instruction_at_checked;
 
@@ -14,10 +11,10 @@ pub mod memo_program {
 }
 
 #[program]
-pub mod mscp_social {
+pub mod openmscp {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+    pub fn initialize(_ctx: Context<Initialize>) -> Result<()> {
         Ok(())
     }
 

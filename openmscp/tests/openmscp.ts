@@ -1,16 +1,16 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 // Note: Need to build the program with 'anchor build --arch sbf' before this import works
-import { MscpSocial } from "../target/types/mscp_social";
+import { Openmscp } from "../target/types/openmscp";
 import { expect } from "chai";
 import * as bs58 from "bs58";
 
-describe("mscp-social", () => {
+describe("openmscp", () => {
   // Configure the client to use the local cluster
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  const program = anchor.workspace.MscpSocial as Program<MscpSocial>;
+  const program = anchor.workspace.Openmscp as Program<Openmscp>;
   const user = provider.wallet;
 
   it("Creates a profile", async () => {
