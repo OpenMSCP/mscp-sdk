@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_lang::solana_program::sysvar::instructions::{ID as INSTRUCTIONS_ID};
 use anchor_lang::solana_program::sysvar::instructions::load_instruction_at_checked;
 
-declare_id!("HpphDK8HgBUAs8zztpEJiwxX2pmwi8qmQpugRhuiwf3x");
+declare_id!("9CuK5BsFiUEF781iSYSJt1BP2xJxDLH2DrVvfoZKJAtj");
 
 // Solana Memo Program ID
 pub mod memo_program {
